@@ -217,6 +217,8 @@ class Tablero {
 	getPixel(x, y) {
 		let index = x * this.columnas + y;
 		let pixel = this.mapa["index"];
+
+		return pixel;
 	}
 
 	printTablero() {
