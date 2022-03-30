@@ -18,30 +18,32 @@
     <h1>Registrar</h1>
     <div class="contenedor1">
         <div class="contenido1">
-            <form action="#register">
+            <form action="#register" id="form-register">
                 <div class="content-form">
                     <div>Avatar</div>
                     <input type="file" name="avatar" id="file-avatar" />
                     <div>
-                        <img class="image-avatar" alt="Avatar" id="avatar">
+                        <img class="image-avatar" id="avatar">
                     </div>
                 </div>
                 <div class="content-form">
                     <div>Email</div>
-                    <input type="text" name="email" />
+                    <input type="text" name="email" id="email" />
                 </div>
                 <div class="content-form">
                     <div>Password</div>
-                    <input type="text" name="password" />
+                    <input type="password" name="password" id="password" />
                 </div>
                 <div class="content-form">
                     <div>Repetir Password</div>
-                    <input type="text" name="password" />
+                    <input type="password" name="password" id="rpassword" />
                 </div>
                 <button type="submit">Enviar</button>
             </form>
+            <div id="message"></div>
         </div>
     </div>
+    <a href="salas.html">Salas</a>
 </body>
 
 </html>

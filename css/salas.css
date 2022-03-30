@@ -20,3 +20,8 @@
     background-color: aquamarine;
     cursor: pointer;
 }
+
+#avatar{
+    width: 100px;
+    height: 100px;
+}
