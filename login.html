@@ -14,18 +14,19 @@
     <script src="js/login.js"></script>
 </head>
 
-<body>
+<body class="text-center">
     <h1>Login</h1>
     <div class="contenedor1">
         <div class="contenido1">
             <form action="#login">
-                <div class="content-form">
-                    <div>Email</div>
-                    <input type="text" name="email" />
-                </div>
-                <div class="content-form">
-                    <div>Password</div>
-                    <input type="text" name="password" />
+                <h2 class="h3 mb-3 fw-normal">Please sign in</h2>
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                  </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
                 </div>
                 <button type="submit">Enviar</button>
                 <a href="register.html">Registrar</a>
