@@ -14,35 +14,35 @@
     <script src="js/register.js"></script>
 </head>
 
-<body>
-    <h1>Registrar</h1>
+<body class="text-center">
+    <h1>Registrate</h1>
     <div class="contenedor1">
         <div class="contenido1">
             <form action="#register" id="form-register">
                 <div class="content-form">
-                    <div>Avatar</div>
+                    <div>Avatar</div><br>
                     <input type="file" name="avatar" id="file-avatar" />
                     <div>
                         <img class="image-avatar" id="avatar">
                     </div>
                 </div>
                 <div class="content-form">
-                    <div>Email</div>
-                    <input type="text" name="email" id="email" />
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com">
                 </div>
                 <div class="content-form">
-                    <div>Password</div>
-                    <input type="password" name="password" id="password" />
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
                 </div>
                 <div class="content-form">
-                    <div>Repetir Password</div>
-                    <input type="password" name="password" id="rpassword" />
+                    <label for="exampleInputPassword1" class="form-label">Repetir password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
                 </div>
-                <button type="submit">Enviar</button>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
             </form>
             <div id="message"></div>
         </div>
-    </div>
+    </div></br>
     <a href="salas.html">Salas</a>
 </body>
 
