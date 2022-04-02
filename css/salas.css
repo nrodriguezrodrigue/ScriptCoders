@@ -4,6 +4,7 @@
 }
 .contenido1 {
     margin: 0 auto; /* requerido para alineación horizontal */
+    border:#090a0a
 }
 
 .content-salas{
@@ -17,11 +18,15 @@
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 50px;
-    background-color: aquamarine;
+    background-color: #f4f8f8;
     cursor: pointer;
 }
 
 #avatar{
     width: 100px;
     height: 100px;
+}
+
+body {
+    background-color: #9fc5f8;
 }
