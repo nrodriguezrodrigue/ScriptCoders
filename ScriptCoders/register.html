@@ -14,8 +14,9 @@
     <script src="js/register.js"></script>
 </head>
 
-<body>
-    <h1>Registrar</h1>
+<body class="text-center">
+    <h1 class="text-white-50">Registrar</h1>
+    <img src="images/logo_size.jpg">
     <div class="contenedor1">
         <div class="contenido1">
             <form action="#register" id="form-register">
@@ -23,27 +24,28 @@
                     <div>Avatar</div>
                     <input type="file" name="avatar" id="file-avatar" />
                     <div>
-                        <img class="image-avatar" id="avatar">
+                        <img class="rounded-circle" id="avatar">
                     </div>
                 </div>
                 <div class="content-form">
-                    <div>Email</div>
-                    <input type="text" name="email" id="email" />
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="name@example.com">
                 </div>
                 <div class="content-form">
-                    <div>Password</div>
-                    <input type="password" name="password" id="password" />
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
                 </div>
                 <div class="content-form">
-                    <div>Repetir Password</div>
-                    <input type="password" name="password" id="rpassword" />
+                    <label for="exampleInputPassword1" class="form-label">Repetir password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
                 </div>
-                <button type="submit">Enviar</button>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
             </form>
             <div id="message"></div>
         </div>
-    </div>
-    <a href="salas.html">Salas</a>
+    </div></br>
+    <p><strong>Are you registered?</strong></p>
+    <a class="btn btn-primary" href="salas.html" role="button">entrar a salas</a>
 </body>
 
 </html>
