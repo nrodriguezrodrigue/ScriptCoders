@@ -33,3 +33,17 @@ function mostrarImagen(event) {
 $(function () {
     init();
 });
+
+
+function guardarDatos() {
+    localStorage.image = document.getElementById("image").value;
+    localStorage.password = document.getElementById("password").value;
+}
+
+function recuperarDatos() {
+    if ((localStorage.email != undefined) && (localStorage.email != undefined)) {
+        document.getElementById("datos").innerHTML = "Email: " + localStorage.email + " Password: " + localStorage.password;
+    } else {
+        document.getElementById("datos").innerHTML = "No has introducido tu email y tu password";
+    }
+}
