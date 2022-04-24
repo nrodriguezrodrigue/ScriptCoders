@@ -6,7 +6,16 @@ function init() {
         var image = $('#avatar').attr('src');
         var password = $('#password').val();
         var rpassword = $('#rpassword').val();
-        var email = $('email').val();
+        var email = $('#email').val();
+        var result = false; 
+        var jugador = {
+            tipoElem: "jugador",
+            username: "",
+            password: "",
+            pathAvatar: ""
+        };
+
+        event.preventDefault();
 
         if (!(password !== '' && password === rpassword && email !== '' && image !== '')) {
             event.preventDefault();
@@ -14,9 +23,29 @@ function init() {
         } else {
             var preferencias = { image: image };
             var preferenciasStr = JSON.stringify(preferencias);
-
-            sessionStorage.setItem('preferencias', preferenciasStr);
+                        
+            $.post("http://localhost:3000/register", { email: email, password: password, path: image }, function (respuesta) {
+                if (respuesta["codigo"] == 200) {
+                    console.log(respuesta);
+                    jugador = {
+                        tipoElem: "jugador",
+                        username: email,
+                        password: password,
+                        pathAvatar: image
+                    }
+                    localStorage.setItem(email, JSON.stringify(jugador));
+                    $('#message').text('Usuario registrado correctamente');
+                    console.log(localStorage);
+                }
+                else {
+                    console.log(respuesta);
+                }
+            });
+            
+            result = true;
         }
+
+        //return result;
     });
 }
 

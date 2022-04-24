@@ -117,10 +117,10 @@ class Pareja {
 
 class Pixel {
 	// Modulo exportado
-	constructor(coordX = 0, coordY = 0, ocup = false) {
+	constructor(coordX = 0, coordY = 0, ocup = "0") {
 		this.coordX = coordX;
 		this.coordY = coordY;
-		this.ocupado = false;
+		this.ocupado = "0";
 
 	}
 
@@ -131,7 +131,7 @@ class Pixel {
 	setCoordY(newY) {
 		this.coordY = newY;
 	}
-	setOcupado(newOcup) {
+	setOcupado(newOcup = "0") {
 		this.ocupado = newOcup;
 	}
 
@@ -148,7 +148,7 @@ class Pixel {
 		return this.ocupado;
 	}
 	getSymbol() {
-		return (this.ocupado) ? "X" : "0";
+		return this.ocupado;
 	}
 }
 
@@ -203,12 +203,15 @@ class Tablero {
 		}
 	}
 
-	escribirPixel(x, y, value = true) {
+	escribirPixel(x, y, value = "0") {
 		let result = false;
 		let index = x * this.columnas + y;
 
 		if (this.mapa[index] !== null) {
 			this.mapa[index].setOcupado(value);
+			if (value > "0") {
+				result = true;
+			}
 		}
 
 		return result;
@@ -250,7 +253,7 @@ class Sala {
 		this.id = 0;
 		this.pareja = new Pareja();
 		this.desc = desc;
-		this.tablero = null;
+		this.tablero = new Tablero(6, 6, this.pareja);// Los tableros son de 8x8 por defecto
 	}
 
 	//Setters

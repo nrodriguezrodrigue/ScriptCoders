@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\js"
+    "\\controllers",
+    "\\js",
+    "\\js\\lib",
+    "\\views"
   ],
-  "SelectedNode": "\\js\\Modelo.js",
+  "SelectedNode": "\\controllers\\juegoController.js",
   "PreviewInSolutionExplorer": false
 }
