@@ -1,4 +1,7 @@
 function init() {
+    localStorage.clear();
+    sessionStorage.clear();
+    
     $('#message').text('');
     $('#file-avatar').change(mostrarImagen);
 
@@ -33,7 +36,8 @@ function init() {
                         password: password,
                         pathAvatar: image
                     }
-                    localStorage.setItem(email, JSON.stringify(jugador));
+                    localStorage.setItem('jugador', JSON.stringify(jugador));
+                    localStorage.setItem('preferencias', preferenciasStr);
                     $('#message').text('Usuario registrado correctamente');
                     console.log(localStorage);
                 }

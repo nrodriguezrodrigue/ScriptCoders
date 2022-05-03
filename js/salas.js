@@ -7,6 +7,7 @@ function init() {
 
     $('#sala1, #sala2, #sala3, #sala4').on('click', gotoTablero);
 
+    debugger;
     var preferencias = JSON.parse(localStorage.getItem('preferencias'));
     if (preferencias) {
         let img = '<img class="rounded-circle" alt="avatar" id="avatar" draggable="true" src="' + preferencias.image + '"/>';

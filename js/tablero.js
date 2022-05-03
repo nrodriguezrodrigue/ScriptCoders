@@ -4,6 +4,7 @@ const WIDTH = 50;
 const HEIGTH = 50;
 var sala = null;
 var jugador = "";
+let color; // 1 empezar por arriba
 
 var socket = io.connect("http://localhost:3000", { forceNew: true });
 // Defino los mensajes a enviar
@@ -61,20 +62,19 @@ function init2() {
 
     // El modelo deb proporcionar la zona por donde el jugador puede empezar (arriba o abajo)
     // petición ajax
-    let color = 1 // 1 empezar por arriba
-    /*
-    if (sala["pareja"]["jugador2"] !== null && sala["pareja"]["jugador2"] == jugador) {
-        color = 0 // 0 empezar por abajo
+
+
+    let j1 = sala["pareja"]["jugador1"];
+    let j2 = sala["pareja"]["jugador2"];
+
+    if (j1 !== null && j1.username == jugador) {
+        color = 1 // 0 empezar por abajo
+    } else if (j2 !== null && j2.username == jugador) {
+        color = 0;
     }
-    */
-    let fill = 'red';
-    if (color === 0) {
-        fill = 'green';
-    }
+
     const canvas = document.getElementById('tablero');
     const ctx = canvas.getContext('2d');
-
-    
 
     let matrixSquares = [];
 
@@ -100,7 +100,7 @@ function init2() {
 
         matrixSquares.push(arraySquares);
     }
-    
+
     function paintedSquare(color) {
         let exist = false;
         matrixSquares.forEach((arraySquares, i) => {
@@ -137,27 +137,30 @@ function init2() {
         if (currentSquares && !currentSquares.painted) {
             let exist = paintedSquare(color);
             if (!exist) {
+                let painted = false;
                 if (row === (ROWS - 1) && color === 0) {
 
+                    painted = true;
                     ctx.fillStyle = 'red';
                     ctx.fill(currentSquares);
                     currentSquares.painted = 0;
 
                 } else if (row === 0 && color === 1) {
+                    painted = true;
                     ctx.fillStyle = 'green';
                     ctx.fill(currentSquares);
                     currentSquares.painted = 1;
-                }       
+                }
 
-                escribirPixel_msg = {
-                    username: jugador, // email del jugador que escribe en el tablero
-                    idSala: 0,
-                    coordX: row,
-                    coordY: column
-                };
-                sendMessage("escribirPixel", escribirPixel_msg);
-                
-                
+                if (painted) {
+                    escribirPixel_msg = {
+                        username: jugador, // email del jugador que escribe en el tablero
+                        idSala: 0,
+                        coordX: row,
+                        coordY: column
+                    };
+                    sendMessage("escribirPixel", escribirPixel_msg);
+                }
             } else {
                 // Buscar el adyacente [row, column] indican la posición donde está
                 let painted = false;
@@ -231,11 +234,11 @@ function init2() {
                         coordY: column
                     };
                     sendMessage("escribirPixel", escribirPixel_msg);
-                    
+
                 }
 
             }
-        }        
+        }
     });
 
     function printSquares() {
@@ -260,20 +263,20 @@ function init2() {
         matrixSquares.forEach((arraySquares, i) => {
             arraySquares.forEach((squares, j) => {
                 index = i * COLUMNS + j;
-                if (sala["tablero"]["mapa"][index]["ocupado"] > "0") {
+                if (sala["tablero"]["mapa"][index]["ocupado"] !== '0') {
                     currentS = squares;
                     row = i;
                     column = j;
 
-                    if (sala["tablero"]["mapa"][index]["ocupado"] > "1") {
-                        ctx.fillStyle = 'red';
-                        ctx.fill(currentS);
-                        currentS.painted = 0;
-                    }
-                    else {
+                    if (sala["tablero"]["mapa"][index]["ocupado"] === '1') {
                         ctx.fillStyle = 'green';
                         ctx.fill(currentS);
                         currentS.painted = 1;
+                    }
+                    else {
+                        ctx.fillStyle = 'red';
+                        ctx.fill(currentS);
+                        currentS.painted = 0;
                     }
                 }
             });
@@ -283,26 +286,27 @@ function init2() {
 
 
 $(function () {
-    Object.keys(sessionStorage).forEach(function (key) {
-        var x = JSON.parse(sessionStorage.getItem(key));
-        try {
-            jugador = x["username"];
-        } catch (e) {
-            console.log(x);
-        }
-    });
+    debugger
+    let j = localStorage.getItem('jugador');
+    var x = JSON.parse(j);
+    try {
+        jugador = x["username"];
+    } catch (e) {
+        console.log(x);
+    }
 
     socket.on("infoSala_ACK", function (data) {
         console.log(data);
         console.log(jugador);
         sala = data["sala"];
+        debugger;
         if (data["username"] !== null && data["username"] == jugador) {
             init2();
-        }        
+        }
     });
     infoSala_msg = {
         idSala: 0,
         username: jugador
     };
-    sendMessage("infoSala", infoSala_msg);    
+    sendMessage("infoSala", infoSala_msg);
 });
