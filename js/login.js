@@ -27,18 +27,31 @@ function validate(){
 
         $.post("http://localhost:3000/login", { email: email, password: password }, function (respuesta) {
             if (respuesta["codigo"] == 200) {
+                localStorage.clear();
+                sessionStorage.clear();
+                console.log("Jugadores: ");
+                console.log(respuesta["jugadores"]);
+                respuesta["jugadores"].forEach((i) => {
+                    jugador = {
+                        tipoElem: "jugador",
+                        username: i["username"],
+                        password: i["password"],
+                        pathAvatar: i["pathAvatar"]
+                    }
+                    localStorage.setItem('jugador:' + jugador["username"], JSON.stringify(jugador));
+                });
+
                 console.log(respuesta);
                 jugador = {
                     tipoElem: "jugador",
                     username: email,
                     password: password,
                 }
-                sessionStorage.setItem(email, JSON.stringify(jugador));
+                sessionStorage.setItem("jugador", JSON.stringify(jugador));
                 window.location = "../views/salas.html"; // Redirige a otra p�gina
             }
             else {
                 console.log(respuesta);
-                addMessage("Hola que tal como estas!!!!")
                 //window.location.href = window.location.href;
             }
         });

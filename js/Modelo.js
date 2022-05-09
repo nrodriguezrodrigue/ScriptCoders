@@ -1,7 +1,7 @@
 class Jugador {
 	// Modulo exportado
 	constructor(name = "", user = "", pass = "", path = "") {
-		this.id = 0;
+		this._id = "ID: " + user;
 		this.nombre = name;
 		this.username = user;
 		this.password = pass;
@@ -10,7 +10,7 @@ class Jugador {
 
 	//Setters
 	setId(newId) {
-		this.id = newId;
+		this._id = newId;
 	}
 
 	setNombre(newNombre) {
@@ -22,17 +22,17 @@ class Jugador {
 	}
 
 	setPassword(newPass) {
-		this.id = newPass;
+		this.password = newPass;
 	}
 
 	setPath(newPath) {
-		this.id = newPath;
+		this.pathAvatar = newPath;
 	}
 
 	// Getters
 
 	getId() {
-		return this.id;
+		return this._id;
 	}
 
 	getNombre() {
@@ -250,7 +250,7 @@ class Tablero {
 class Sala {
 	// Modulo exportado
 	constructor(desc = "Sala") {
-		this.id = 0;
+		this._id = 0;
 		this.pareja = new Pareja();
 		this.desc = desc;
 		this.tablero = new Tablero(6, 6, this.pareja);// Los tableros son de 8x8 por defecto
@@ -261,10 +261,18 @@ class Sala {
 		this.desc = newDesc;
 	}
 
+	setID(newID) {
+		this._id = newID;
+	}
+
 
 	// Getters
 	getDesc() {
 		return this.desc;
+	}
+
+	getID() {
+		return this._id;
 	}
 
 

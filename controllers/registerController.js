@@ -4,6 +4,9 @@ var router = express.Router();
 
 const { Jugador, Pareja, Pixel, Tablero, Sala } = require("../js/Modelo.js");
 
+// Añado Mongo
+const { insertJugador, getJugador } = require("../js/DB.js");
+
 
 router.post('/', function (req, res) {
     let error = false;
@@ -39,7 +42,9 @@ router.post('/', function (req, res) {
             codigo: 200,
             mensaje: 'El usuario ha sido creado'
         };
-        jugadores.push(new Jugador(req.body.username, req.body.email, req.body.password, req.body.path));
+        var gamer = new Jugador(req.body.username, req.body.email, req.body.password, req.body.path);
+        jugadores.push(gamer);
+        insertJugador(gamer);
     }
 
     console.log();

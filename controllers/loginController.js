@@ -11,7 +11,8 @@ router.post('/', function (req, res) {
             error: true,
             codigo: 500,
             tablero: null,
-            jugador: null
+            jugador: null,
+            jugadores: jugadores
         };
 
         let email = req.body.email;
@@ -26,7 +27,8 @@ router.post('/', function (req, res) {
                     error: false,
                     codigo: 200,
                     tablero: null,
-                    jugador: i
+                    jugador: i,
+                    jugadores: jugadores
                 };
             }
         })

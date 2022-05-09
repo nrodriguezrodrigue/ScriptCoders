@@ -287,7 +287,7 @@ function init2() {
 
 $(function () {
     debugger
-    let j = localStorage.getItem('jugador');
+    let j = sessionStorage.getItem('jugador');
     var x = JSON.parse(j);
     try {
         jugador = x["username"];
