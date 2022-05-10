@@ -28,7 +28,8 @@ function init() {
             var preferenciasStr = JSON.stringify(preferencias);
                         
             $.post("http://localhost:3000/register", { email: email, password: password, path: image }, function (respuesta) {
-                if (respuesta["codigo"] == 200) {
+            debugger;    
+            if (respuesta["codigo"] == 200) {
                     console.log(respuesta);
                     jugador = {
                         tipoElem: "jugador",
@@ -36,6 +37,7 @@ function init() {
                         password: password,
                         pathAvatar: image
                     }
+                    debugger;
                     localStorage.setItem('jugador', JSON.stringify(jugador));
                     localStorage.setItem('preferencias', preferenciasStr);
                     $('#message').text('Usuario registrado correctamente');

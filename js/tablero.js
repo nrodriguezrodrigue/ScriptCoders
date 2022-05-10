@@ -246,13 +246,15 @@ function init2() {
         // Printo avatares
         let image = null;
 
-
+        
         if (sala["pareja"]["jugador1"] !== null) {
+            debugger;
             image = document.createElement('img');
             image.src = sala["pareja"]["jugador1"]["pathAvatar"];
             ctx.drawImage(image, 200, 20, 50, 50);
         }
         if (sala["pareja"]["jugador2"] !== null) {
+            debugger;
             image = document.createElement('img');
             image.src = sala["pareja"]["jugador2"]["pathAvatar"];
             ctx.drawImage(image, 300, 20, 50, 50);
@@ -287,7 +289,7 @@ function init2() {
 
 $(function () {
     debugger
-    let j = sessionStorage.getItem('jugador');
+    let j = localStorage.getItem('jugador');
     var x = JSON.parse(j);
     try {
         jugador = x["username"];

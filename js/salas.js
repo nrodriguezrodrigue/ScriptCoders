@@ -8,15 +8,24 @@ function init() {
     $('#sala1, #sala2, #sala3, #sala4').on('click', gotoTablero);
 
     debugger;
-    var preferencias = JSON.parse(localStorage.getItem('preferencias'));
-    if (preferencias) {
-        let img = '<img class="rounded-circle" alt="avatar" id="avatar" draggable="true" src="' + preferencias.image + '"/>';
-        if(preferencias.sala){
-            $('#'+preferencias.sala).html(img);
+    var jugador = JSON.parse(localStorage.getItem('jugador'));
+    if (jugador) {
+        let img = '<img class="rounded-circle" alt="avatar" id="avatar" draggable="true" src="' + jugador.pathAvatar + '"/>';
+        if(jugador.sala){
+            $('#'+jugador.sala).html(img);
         }else{
             $('#avatar').html(img);
         }
     }
+}
+
+function asociarSala(username, salaId){
+    $.post("http://localhost:3000/asociarsala", { username: username, salaId: salaId }, function (respuesta) {
+        if (respuesta["codigo"] == 200) {
+            debugger;
+           console.log('El jgador ya tiene asociada la sala');
+        }
+    });
 }
 
 function logout() {
@@ -49,12 +58,17 @@ function drop(ev) {
     console.log(data);
     ev.originalEvent.target.appendChild(document.getElementById(data));
 
-    debugger
-    var preferencias = JSON.parse(localStorage.getItem('preferencias'));
-    preferencias['sala'] = ev.currentTarget.id;
-    var preferenciasStr = JSON.stringify(preferencias);
+    var jugador = JSON.parse(localStorage.getItem('jugador'));
+    jugador['sala'] = ev.currentTarget.id;
+    var jugadorStr = JSON.stringify(jugador);
 
-    localStorage.setItem('preferencias', preferenciasStr);
+    localStorage.setItem('jugador', jugadorStr);
+
+    // Jugador se inserta en la sala
+    debugger;
+    const name =  jugador.username;
+    const sala = jugador.sala.charAt(jugador.sala.length-1); 
+    asociarSala(name, sala);
 }
 
 function printJugadores() {    

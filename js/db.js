@@ -6,10 +6,10 @@ const initDB = () => {
         DB_URI,
         (err, db) => {
             if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
+                console.log("Error en la conexi贸n a la Base de Datos");
             }
             else {
-                console.log("Conexi髇 correcta");
+                console.log("Conexi贸n correcta");
                 db.close();
             }
         }
@@ -21,22 +21,22 @@ const createCollection = () => {
         DB_URI,
         (err, db) => {
             if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
+                console.log("Error en la conexi贸n a la Base de Datos");
             }
             else {
                 db.db("scriptcoders").createCollection("salas", function (err, res) {
                     if (err) {
                         if (err.ok == 0 && err.code == 48) {
-                            console.log("La Colecci髇 ya existe");
+                            console.log("La Colecci贸n ya existe");
                         }
                         else {
-                            console.log("Error al crear la conexi髇");
-                        }                        
+                            console.log("Error al crear la conexi贸n");
+                        }
                     }
                     else {
-                        console.log("Colecci髇 creada!");
+                        console.log("Colecci贸n creada!");
                         db.close();
-                    }                    
+                    }
                 });
             }
         }
@@ -48,20 +48,20 @@ const createCollectionJugadores = () => {
         DB_URI,
         (err, db) => {
             if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
+                console.log("Error en la conexi贸n a la Base de Datos");
             }
             else {
                 db.db("scriptcoders").createCollection("jugadores", function (err, res) {
                     if (err) {
                         if (err.ok == 0 && err.code == 48) {
-                            console.log("La Colecci髇 ya existe");
+                            console.log("La Colecci贸n ya existe");
                         }
                         else {
-                            console.log("Error al crear la conexi髇");
+                            console.log("Error al crear la conexi贸n");
                         }
                     }
                     else {
-                        console.log("Colecci髇 creada!");
+                        console.log("Colecci贸n creada!");
                         db.close();
                     }
                 });
@@ -75,7 +75,7 @@ const insertSala = (sala) => {
         DB_URI,
         (err, db) => {
             if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
+                console.log("Error en la conexi贸n a la Base de Datos");
             }
             else {
                 db.db("scriptcoders").collection("salas").insertOne(sala, function (err, res) {
@@ -85,7 +85,7 @@ const insertSala = (sala) => {
                         }
                         else {
                             console.log("Error al insertar datos");
-                        }    
+                        }
                     }
                     else {
                         console.log("Datos de sala insertados!");
@@ -102,7 +102,7 @@ const insertJugador = (jugador) => {
         DB_URI,
         (err, db) => {
             if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
+                console.log("Error en la conexi贸n a la Base de Datos");
             }
             else {
                 db.db("scriptcoders").collection("jugadores").insertOne(jugador, function (err, res) {
@@ -130,10 +130,10 @@ const getSala = (idSala, sala) => {
         DB_URI,
         (err, db) => {
             if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
+                console.log("Error en la conexi贸n a la Base de Datos");
             }
             else {
-                db.db("scriptcoders").collection("salas").findOne({ _id: idSala}, function (err, res) {
+                db.db("scriptcoders").collection("salas").findOne({ _id: idSala }, function (err, res) {
                     if (err) {
                         console.log("Error al buscar la sala");
                     }
@@ -149,28 +149,32 @@ const getSala = (idSala, sala) => {
     )
 }
 
-const getJugador = (idJugador, jugador) => {
-    MongoClient.connect(
-        DB_URI,
-        (err, db) => {
-            if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
+const getJugador = (idJugador) => {
+    return new Promise((resolve, reject) => {
+
+        MongoClient.connect(
+            DB_URI,
+            (err, db) => {
+                if (err) {
+                    console.log("Error en la conexi贸n a la Base de Datos");
+                }
+                else {
+
+                    db.db("scriptcoders").collection("jugadores").findOne({ _id: idJugador }, function (err, res) {
+                        if (err) {
+                            console.log("Error al buscar al Jugador");
+                            reject("Error al buscar al Jugador");
+                        }
+                        else {
+                            resolve(res);
+                            db.close();
+                        }
+                    });
+
+                }
             }
-            else {
-                db.db("scriptcoders").collection("jugadores").findOne({ _id: idJugador }, function (err, res) {
-                    if (err) {
-                        console.log("Error al buscar al Jugador");
-                    }
-                    else {
-                        console.log(jugador);
-                        jugador = res;
-                        console.log(jugador);
-                        db.close();
-                    }
-                });
-            }
-        }
-    )
+        )
+    });
 }
 
 const getJugadores = (jugadores) => {
@@ -178,7 +182,7 @@ const getJugadores = (jugadores) => {
         DB_URI,
         (err, db) => {
             if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
+                console.log("Error en la conexi贸n a la Base de Datos");
             }
             else {
                 db.db("scriptcoders").collection("jugadores").find({}).toArray(function (err, res) {
@@ -200,8 +204,8 @@ const actualizarSala = (idSala, sala) => {
         DB_URI,
         (err, db) => {
             if (err) {
-                console.log("Error en la conexi髇 a la Base de Datos");
-            } 
+                console.log("Error en la conexi贸n a la Base de Datos");
+            }
             else {
                 db.db("scriptcoders").collection("salas").updateOne({ _id: idSala }, { $set: sala }, function (err, res) {
                     if (err) {
@@ -218,12 +222,40 @@ const actualizarSala = (idSala, sala) => {
     )
 }
 
+const actualizarJugador = (jugador) => {
+    return new Promise((resolve, reject) => {
+        debugger;
+        MongoClient.connect(
+            DB_URI,
+            (err, db) => {
+                if (err) {
+                    console.log("Error en la conexi贸n a la Base de Datos");
+                }
+                else {
+                    db.db("scriptcoders").collection("jugadores").updateOne({ _id: jugador._id }, { $set: jugador }, function (err, res) {
+                        if (err) {
+                            console.log("Error al actualizar el jugador");
+                            reject("Error al actualizar el jugador");
+                        }
+                        else {
+                            resolve(res)
+                            db.close();
+                        }
+                    });
+                }
+            }
+        )
+    });
+}
+
+
 module.exports = {
     initDB,
     createCollection,
     createCollectionJugadores,
     insertSala,
     insertJugador,
+    actualizarJugador,
     getSala,
     getJugador,
     getJugadores,

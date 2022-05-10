@@ -2,6 +2,7 @@ var express = require("express");
 
 var register = require('./controllers/registerController');
 var login = require('./controllers/loginController');
+var asociarsala = require('./controllers/asociarsalaController');
 
 var app = express();
 
@@ -16,7 +17,7 @@ const { initDB, createCollection, createCollectionJugadores, insertSala, insertJ
 
 const { Jugador, Pareja, Pixel, Tablero, Sala } = require("./js/Modelo.js");
 
-// Creación de los elementos iniciales de la app
+// Creaciï¿½n de los elementos iniciales de la app
 global.jugadores = [];
 global.salas = [];
 salas[0] = new Sala("Sala 0");
@@ -50,7 +51,7 @@ global.respuesta2 = {
     mensaje: 'Fallo en el register'
 };
 
-// Aquí incluyo la parte de la BBDD mongo
+// Aquï¿½ incluyo la parte de la BBDD mongo
 initDB();
 createCollection();
 
@@ -74,7 +75,7 @@ setTimeout(() => {
 */
 
 
-//salas[0].setDesc("Descripción de sala editada 1");
+//salas[0].setDesc("Descripciï¿½n de sala editada 1");
 //actualizarSala(salas[0].getID(), salas[0]);
 
 //JSON.parse(salas[0]);
@@ -87,6 +88,8 @@ app.use(bodyParser.json());
 
 app.use('/login', login);
 app.use('/register', register);
+app.use('/asociarsala', asociarsala);
+
 //app.use('/juego', juego);
 app.use(express.static(__dirname + "/"));
 

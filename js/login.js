@@ -8,7 +8,24 @@ var jugador = {
     pathAvatar: ""
 };
 
+
 function init(){
+    let miPrimeraPromise = new Promise((resolve, reject) => {
+        // Llamamos a resolve(...) cuando lo que estabamos haciendo finaliza con éxito, y reject(...) cuando falla.
+        // En este ejemplo, usamos setTimeout(...) para simular código asíncrono.
+        // En la vida real, probablemente uses algo como XHR o una API HTML5.
+        setTimeout(function(){
+            debugger;
+            resolve("¡Éxito!"); // ¡Todo salió bien!
+        }, 250);
+      });
+
+      debugger;
+      miPrimeraPromise.then(function(res){
+          debugger;
+          console.log(res);
+      });
+
     $('#form-login').submit(function (event) {
         event.preventDefault();
         validate();
@@ -46,9 +63,10 @@ function validate(){
                     tipoElem: "jugador",
                     username: email,
                     password: password,
+                    pathAvatar: jugador.pathAvatar
                 }
-                sessionStorage.setItem("jugador", JSON.stringify(jugador));
-                window.location = "../views/salas.html"; // Redirige a otra p�gina
+                localStorage.setItem("jugador", JSON.stringify(jugador));
+                window.location = "../views/salas.html"; // Redirige a otra página
             }
             else {
                 console.log(respuesta);
